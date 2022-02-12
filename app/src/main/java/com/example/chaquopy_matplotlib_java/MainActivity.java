@@ -3,6 +3,7 @@ package com.example.chaquopy_matplotlib_java;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +21,9 @@ import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 import com.chaquo.python.Python.Platform;
 import com.chaquo.python.android.AndroidPlatform;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
 
 //import org.jetbrains.annotations.Nullable;
 
@@ -54,6 +58,7 @@ public final class MainActivity extends AppCompatActivity {
         //final PyObject module = var4;
         
         ((Button)this.findViewById(R.id.button)).setOnClickListener((OnClickListener)(new OnClickListener() {
+            @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
             public final void onClick(View it) {
                 try {
                     //PyObject var10000 = module;
@@ -87,9 +92,11 @@ public final class MainActivity extends AppCompatActivity {
 
                     if (var9 != null) {
                         View var4 = var9;
-                        //int var6 = false;
+                        Boolean var6 = false;
 
-                        var8 = "getSystemService(var8)";
+
+                        //var8 = MainActivity.this.getSystemService("input_method");
+                        var8 = MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
                         if (var8 == null) {
                             throw new NullPointerException("null cannot be cast to non-null type android.view.inputmethod.InputMethodManager");
                         }

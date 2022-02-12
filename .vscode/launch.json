@@ -10,6 +10,7 @@
             "name": "Android launch",
             "appSrcRoot": "${workspaceRoot}/app/src/main",
             "apkFile": "${workspaceRoot}/app/build/outputs/apk/debug/app-debug.apk",
+            "preLaunchTask": "run gradle",
             "adbPort": 5037
         },
         {

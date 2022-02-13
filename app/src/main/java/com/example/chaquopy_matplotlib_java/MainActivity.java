@@ -52,7 +52,7 @@ public final class MainActivity extends AppCompatActivity {
         //final PyObject module = var4;
         
         ((Button)this.findViewById(R.id.button)).setOnClickListener((OnClickListener)(new OnClickListener() {
-            //@android.support.annotation.RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
+            @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
             public final void onClick(View it) {
                 try {
                     //PyObject var10000 = module;

@@ -73,7 +73,7 @@ public final class MainActivity extends AppCompatActivity {
 
 
                     //public PyObject callAttr(@NotNull String key, Object... args)
-                    Object var8 = module.callAttr("plot",HorV).toJava(byte[].class);
+                    Object var8 = module.callAttr("plot",Coordinates).toJava(byte[].class);
                     //Object var8 = var10000.callAttr("plot", var10002).toJava(byte[].class);
                     //Intrinsics.checkNotNullExpressionValue(var8, "module.callAttr(\"plot\",\n…va(ByteArray::class.java)");
 
@@ -100,7 +100,7 @@ public final class MainActivity extends AppCompatActivity {
                         //var10.hideSoftInputFromWindow(var4.getWindowToken(), 0);
                     }
                 } catch (PyException var7) {
-                    Toast.makeText((Context) MainActivity.this, (CharSequence)var7.getMessage(), 1).show();
+                    Toast.makeText((Context) MainActivity.this, (CharSequence)var7.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
             }

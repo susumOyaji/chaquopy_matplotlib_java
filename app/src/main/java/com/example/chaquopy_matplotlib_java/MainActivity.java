@@ -52,28 +52,28 @@ public final class MainActivity extends AppCompatActivity {
         //final PyObject module = var4;
         
         ((Button)this.findViewById(R.id.button)).setOnClickListener((OnClickListener)(new OnClickListener() {
-            @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
+            //@android.support.annotation.RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
             public final void onClick(View it) {
                 try {
                     //PyObject var10000 = module;
-                    Object[] var10002 = new Object[2];
+                    Object[] Coordinates = new Object[2];
 
 
-                    EditText var10005 = (EditText)findViewById(R.id.etX);
+                    EditText X_coordinates = (EditText)findViewById(R.id.etX);
                     //View var10005 = MainActivity.this.findViewById(R.id.etX);
                     //Intrinsics.checkNotNullExpressionValue(var10005, "findViewById<EditText>(R.id.etX)");
-                    var10002[0] = ((EditText)var10005).getText().toString();
+                    Coordinates[0] = ((EditText)X_coordinates).getText().toString();
 
 
 
-                    var10005 = (EditText)findViewById(R.id.etY);
+                    EditText Y_coordinates = (EditText)findViewById(R.id.etY);
                     //var10005 = MainActivity.this.findViewById(R.id.etY);
                     //Intrinsics.checkNotNullExpressionValue(var10005, "findViewById<EditText>(R.id.etY)");
-                    var10002[1] = ((EditText)var10005).getText().toString();
+                    Coordinates[1] = ((EditText)Y_coordinates).getText().toString();
 
 
                     //public PyObject callAttr(@NotNull String key, Object... args)
-                    Object var8 = module.callAttr("plot",var10005).toJava(byte[].class);
+                    Object var8 = module.callAttr("plot",HorV).toJava(byte[].class);
                     //Object var8 = var10000.callAttr("plot", var10002).toJava(byte[].class);
                     //Intrinsics.checkNotNullExpressionValue(var8, "module.callAttr(\"plot\",\n…va(ByteArray::class.java)");
 

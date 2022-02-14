@@ -1,5 +1,6 @@
 package com.example.chaquopy_matplotlib_java;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,7 +30,9 @@ import java.lang.annotation.Target;
 
 //import kotlin.Metadata;
 //import kotlin.jvm.internal.Intrinsics;
-//import android.renderscript.ScriptIntrinsic;
+import android.renderscript.ScriptIntrinsic;
+
+
 // adb devices
 //adb devices Emulator Reflesh
 
@@ -50,10 +53,11 @@ public final class MainActivity extends AppCompatActivity {
         PyObject module = py.getModule("plot");
         //Intrinsics.checkNotNullExpressionValue(var4, "py.getModule(\"plot\")");
         //final PyObject module = var4;
-        
-        ((Button)this.findViewById(R.id.button)).setOnClickListener((OnClickListener)(new OnClickListener() {
+
+        findViewById(R.id.button).setOnClickListener(new OnClickListener() {
             //@android.support.annotation.RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
-            public final void onClick(View it) {
+            @Override
+            public void onClick(View view) {
                 try {
                     //PyObject var10000 = module;
                     Object[] Coordinates = new Object[2];
@@ -61,7 +65,7 @@ public final class MainActivity extends AppCompatActivity {
 
                     EditText X_coordinates = (EditText)findViewById(R.id.etX);
                     //View var10005 = MainActivity.this.findViewById(R.id.etX);
-                    //Intrinsics.checkNotNullExpressionValue(var10005, "findViewById<EditText>(R.id.etX)");
+                    Intrinsics.checkNotNullExpressionValue(var10005, "findViewById<EditText>(R.id.etX)");
                     Coordinates[0] = ((EditText)X_coordinates).getText().toString();
 
 
@@ -95,16 +99,16 @@ public final class MainActivity extends AppCompatActivity {
                             throw new NullPointerException("null cannot be cast to non-null type android.view.inputmethod.InputMethodManager");
                         }
 
-                        //InputMethodManager var10 = (InputMethodManager)var8;
-                        //Intrinsics.checkNotNullExpressionValue(var4, "it");
-                        //var10.hideSoftInputFromWindow(var4.getWindowToken(), 0);
+                        InputMethodManager var10 = (InputMethodManager)var8;
+                        Intrinsics.checkNotNullExpressionValue(var4, "it");
+                        var10.hideSoftInputFromWindow(var4.getWindowToken(), 0);
                     }
-                } catch (PyException var7) {
-                    Toast.makeText((Context) MainActivity.this, (CharSequence)var7.getMessage(), Toast.LENGTH_LONG).show();
+                } catch (PyException e) {
+                    Toast.makeText((Context) MainActivity.this, (CharSequence)e.getMessage(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(this, e.message, Toast.LENGTH_LONG).show();
                 }
-
             }
-        }));
+        });
     }
 }
 

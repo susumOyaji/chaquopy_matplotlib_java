@@ -51,10 +51,13 @@ public final class MainActivity extends AppCompatActivity {
         //Python py = var10000;
 
         PyObject module = py.getModule("plot");
+        //PyObject module = py.getModule("kabu_pre2");
         //Intrinsics.checkNotNullExpressionValue(var4, "py.getModule(\"plot\")");
         //final PyObject module = var4;
 
         findViewById(R.id.button).setOnClickListener(new OnClickListener() {
+            private MainActivity Intrinsics;
+
             //@android.support.annotation.RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
             @Override
             public void onClick(View view) {
@@ -65,14 +68,25 @@ public final class MainActivity extends AppCompatActivity {
 
                     EditText X_coordinates = (EditText)findViewById(R.id.etX);
                     //View var10005 = MainActivity.this.findViewById(R.id.etX);
-                    Intrinsics.checkNotNullExpressionValue(var10005, "findViewById<EditText>(R.id.etX)");
-                    Coordinates[0] = ((EditText)X_coordinates).getText().toString();
+                    if (X_coordinates == null) {
+                        throw new NullPointerException("null cannot be cast to non-null type ");
+                    }else {
+                        Coordinates[0] = ((EditText)X_coordinates).getText().toString();
+                    }
+
+
+                    //this.Intrinsics.checkNotNullExpressionValue(X_coordinates, "findViewById<EditText>(R.id.etX)");
+
 
 
 
                     EditText Y_coordinates = (EditText)findViewById(R.id.etY);
                     //var10005 = MainActivity.this.findViewById(R.id.etY);
                     //Intrinsics.checkNotNullExpressionValue(var10005, "findViewById<EditText>(R.id.etY)");
+
+
+
+
                     Coordinates[1] = ((EditText)Y_coordinates).getText().toString();
 
 
@@ -99,9 +113,14 @@ public final class MainActivity extends AppCompatActivity {
                             throw new NullPointerException("null cannot be cast to non-null type android.view.inputmethod.InputMethodManager");
                         }
 
-                        InputMethodManager var10 = (InputMethodManager)var8;
-                        Intrinsics.checkNotNullExpressionValue(var4, "it");
-                        var10.hideSoftInputFromWindow(var4.getWindowToken(), 0);
+
+                        //ソフトキーボードを非表示にする
+                        InputMethodManager var10=(InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        var10.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
+                        //InputMethodManager var10 = (InputMethodManager)var8;
+                        //Intrinsics.checkNotNullExpressionValue(var10, "it");
+                        //var10.hideSoftInputFromWindow(var4.getWindowToken(), 0);
                     }
                 } catch (PyException e) {
                     Toast.makeText((Context) MainActivity.this, (CharSequence)e.getMessage(), Toast.LENGTH_LONG).show();
@@ -109,6 +128,10 @@ public final class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void checkNotNullExpressionValue(EditText x_coordinates, String s) {
+        throw new NullPointerException("null cannot be cast to non-null type android.view.inputmethod.InputMethodManager");
     }
 }
 

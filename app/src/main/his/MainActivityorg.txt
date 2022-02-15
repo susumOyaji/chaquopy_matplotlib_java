@@ -1,0 +1,93 @@
+package com.example.chaquopy_matplotlib_java;
+
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.chaquo.python.PyException;
+import com.chaquo.python.PyObject;
+import com.chaquo.python.Python;
+import com.chaquo.python.Python.Platform;
+import com.chaquo.python.android.AndroidPlatform;
+
+//import org.jetbrains.annotations.Nullable;
+
+//import kotlin.Metadata;
+//import kotlin.jvm.internal.Intrinsics;
+
+
+// adb devices
+//adb devices Emulator Reflesh
+
+
+public final class MainActivityorg extends AppCompatActivity {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.setContentView(R.layout.activity_main);
+
+        if (!Python.isStarted()) {
+            Python.start((Platform)(new AndroidPlatform((Context)this)));
+        }
+
+        Python py = Python.getInstance();
+        PyObject module = py.getModule("plot");
+
+
+        findViewById(R.id.button).setOnClickListener(new OnClickListener() {
+           @Override
+            public void onClick(View view) {
+                try {
+
+                    Object[] Coordinates = new Object[2];
+
+
+                    EditText X_coordinates = (EditText)findViewById(R.id.etX);
+                    if (X_coordinates == null) {
+                        throw new NullPointerException("null cannot be cast to non-null type ");
+                    }else {
+                        Coordinates[0] = ((EditText)X_coordinates).getText().toString();
+                    }
+
+
+                   EditText Y_coordinates = (EditText)findViewById(R.id.etY);
+                   Coordinates[1] = ((EditText)Y_coordinates).getText().toString();
+
+
+                    Object var8 = module.callAttr("plot",Coordinates).toJava(byte[].class);
+
+
+                    byte[] bytes = (byte[])var8;
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    ((ImageView) findViewById(R.id.imageView)).setImageBitmap(bitmap);
+
+
+                   //ソフトキーボードを非表示にする
+                   InputMethodManager var10=(InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                   var10.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                   if (var10 == null) {
+                    throw new NullPointerException("null cannot be cast to non-null type android.view.inputmethod.InputMethodManager");
+                   }
+
+                } catch (PyException e) {
+                    Toast.makeText((Context) MainActivityorg.this, (CharSequence)e.getMessage(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(this, e.message, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    private void checkNotNullExpressionValue(EditText x_coordinates, String s) {
+        throw new NullPointerException("null cannot be cast to non-null type android.view.inputmethod.InputMethodManager");
+    }
+}
+

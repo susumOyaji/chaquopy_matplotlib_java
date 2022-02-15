@@ -1,4 +1,4 @@
-package com.chaquo.myapplication
+package com.example.chaquopy_matplotlib_java
 
 import android.content.Context
 import android.graphics.BitmapFactory
